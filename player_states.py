@@ -1,7 +1,7 @@
-from enum import Enum, auto
+from enum import StrEnum, auto
 
 
-class PlayerState(Enum):
+class PlayerState(StrEnum):
     UP = auto()
     DOWN = auto()
     LEFT = auto()

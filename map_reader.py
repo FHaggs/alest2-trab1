@@ -14,10 +14,15 @@ class MapReader:
                     self.map.append(char_array)
         except FileNotFoundError:
             print("file not found")
-        self.size_x: int = sizes[0]
-        self.size_y: int = sizes[1]
+        self.size_x: int = int(sizes[0])
+        self.size_y: int = int(sizes[1])
 
     def get_start_pos(self) -> Tuple[int, int]:
         for i, row in enumerate(self.map):
             if row[0] == "-":
                 return (0, i)
+    def get_pos(self, x: int, y: int)-> str:
+        if x > self.size_x or y > self.size_y:
+            return "EOF"
+        return self.map[y][x]
+
