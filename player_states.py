@@ -1,5 +1,4 @@
-from enum import StrEnum, auto
-
+from enum import StrEnum,auto
 
 class PlayerState(StrEnum):
     UP = auto()
