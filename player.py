@@ -13,21 +13,36 @@ class Player:
     
     def run(self):
         is_over = False
-
+        dinheiro:str =''
         while not is_over:
             current_char = self.consume_char()
-            print(current_char)
-            if(current_char == "-" or current_char == "|"):
+            if(current_char == "-" or current_char == "|"): 
+                if(dinheiro != ''):
+                    self.add_money(dinheiro)
+                    dinheiro = ''
                 pass
             elif(current_char == "/"):
+                if(dinheiro != ''):
+                    self.add_money(dinheiro)
+                    dinheiro = ''
                 self.fix_state_slash()
             elif(current_char == "\\"):
+                if(dinheiro != ''):
+                    self.add_money(dinheiro)
+                    dinheiro = ''
                 self.fix_state_backslash()
             elif(current_char == "#"):
+                if(dinheiro != ''):
+                    self.add_money(dinheiro)
+                    dinheiro = ''
                 is_over = True
+            elif(current_char.isdigit):
+                dinheiro += current_char
+
             if current_char == "EOF":
                 is_over = True
-                
+        print(self.money_arr)
+
     def advance(self):
         match self.state:
             case PlayerState.RIGHT:
@@ -65,3 +80,7 @@ class Player:
             case PlayerState.UP:
                 self.state = PlayerState.LEFT
                 
+
+    def add_money(self,money:str = '0'):
+        if(money.isnumeric and money!='0'):
+            self.money_arr.append(int(money))
