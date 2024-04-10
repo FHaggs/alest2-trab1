@@ -21,16 +21,11 @@ class Player:
                     self.add_money(dinheiro)
                     dinheiro = ''
                 pass
-            elif(current_char == "/"):
+            elif(current_char == "/"or current_char == "\\"):
                 if(dinheiro != ''):
                     self.add_money(dinheiro)
                     dinheiro = ''
-                self.fix_state_slash()
-            elif(current_char == "\\"):
-                if(dinheiro != ''):
-                    self.add_money(dinheiro)
-                    dinheiro = ''
-                self.fix_state_backslash()
+                self.fix_state(current_char)
             elif(current_char == "#"):
                 if(dinheiro != ''):
                     self.add_money(dinheiro)
@@ -58,29 +53,30 @@ class Player:
         self.advance()
         return self.map.get_pos(self.pos_x, self.pos_y)
 
-    def fix_state_slash(self):
-        match self.state:
-            case PlayerState.RIGHT:
-                self.state = PlayerState.UP
-            case PlayerState.LEFT:
-                self.state = PlayerState.DOWN
-            case PlayerState.DOWN:
-                self.state = PlayerState.LEFT
-            case PlayerState.UP:
-                self.state = PlayerState.RIGHT
-
-    def fix_state_backslash(self):
-        match self.state:
-            case PlayerState.RIGHT:
-                self.state = PlayerState.DOWN
-            case PlayerState.LEFT:
-                self.state = PlayerState.UP
-            case PlayerState.DOWN:
-                self.state = PlayerState.RIGHT
-            case PlayerState.UP:
-                self.state = PlayerState.LEFT
+    def fix_state(self,c:str):
+        match(c):
+            case '/':
+                match self.state:
+                    case PlayerState.RIGHT:
+                        self.state = PlayerState.UP
+                    case PlayerState.LEFT:
+                        self.state = PlayerState.DOWN
+                    case PlayerState.DOWN:
+                        self.state = PlayerState.LEFT
+                    case PlayerState.UP:
+                        self.state = PlayerState.RIGHT
+            case '\\':
+                match self.state:
+                    case PlayerState.RIGHT:
+                        self.state = PlayerState.DOWN
+                    case PlayerState.LEFT:
+                        self.state = PlayerState.UP
+                    case PlayerState.DOWN:
+                        self.state = PlayerState.RIGHT
+                    case PlayerState.UP:
+                        self.state = PlayerState.LEFT
                 
-
+                
     def add_money(self,money:str = '0'):
         if(money.isnumeric and money!='0'):
             self.money_arr.append(int(money))
