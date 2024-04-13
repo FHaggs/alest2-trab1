@@ -8,7 +8,6 @@ class MapReader:
             with open(file_path, "r") as file:
                 lines = file.readlines()
                 sizes = lines.pop(0).split()
-                lines
                 for line in lines:
                     char_array = [char for char in line]
                     self.map.append(char_array)
